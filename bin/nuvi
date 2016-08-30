@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'optparse'
+
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'nuvi'
+
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: [options]'
+
+  opts.on_tail('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+end.parse!
+
