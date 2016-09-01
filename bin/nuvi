@@ -1,17 +1,37 @@
 #!/usr/bin/env ruby
 require 'optparse'
+require 'pry'
 
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'nuvi'
 
+options = {}
 
-OptionParser.new do |opts|
+parser = OptionParser.new do |opts|
   opts.banner = 'Usage: [options]'
 
-  opts.on_tail('-h', '--help', 'Show this message') do
+  opts.on('-u', '--url=url', 'Set target URL') do |url|
+    options[:url] = url;
+  end
+
+  opts.on('-h','--host=host',  'Set the redis host') do |host|
+    options[:host] = host;
+  end
+
+  opts.on('-p num', '--port=num', 'Set the redis port') do |port|
+    options[:port] = port;
+  end
+
+  opts.on_tail('--help', 'Display\'s help options') do
     puts opts
     exit
   end
-end.parse!
+end
 
+parser.parse!
+
+binding.pry
+#
+# Entry point to application
+# Nuvi::Web.start(options[:url])
